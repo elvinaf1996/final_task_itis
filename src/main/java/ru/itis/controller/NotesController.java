@@ -71,6 +71,22 @@ public class NotesController {
         return "redirect:/notes";
     }
 
+    @GetMapping("/notes/update")
+    public String getUpdateNote(Long noteId, Model model) {
+        model.addAttribute("note", noteService.findById(noteId));
+        model.addAttribute("noteId", noteId);
+        return "update_note";
+    }
+
+    @PostMapping("/notes/update")
+    public String updateNote(Long noteId, NoteDTO noteDTO) {
+        Note note = noteService.findById(noteId);
+        note.setName(noteDTO.getName());
+        note.setText(noteDTO.getText());
+        noteService.saveNote(note);
+        return "redirect:/notes";
+    }
+
     private boolean isAdmin(UserDetails userDetails) {
         boolean isAdmin = false;
         for (GrantedAuthority authority : userDetails.getAuthorities()) {

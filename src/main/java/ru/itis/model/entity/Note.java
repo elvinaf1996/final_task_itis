@@ -14,7 +14,7 @@ public class Note {
 
     private String name;
 
-    @Column(length = 2000)
+    @Column(length = 1000)
     private String text;
 
     private String userName;

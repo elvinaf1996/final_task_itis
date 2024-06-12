@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Note</title>
+    <title>Update Note</title>
     <style>
         body {
             display: flex;
@@ -40,13 +40,14 @@
     </style>
 </head>
 <body>
-<form method="POST" action="/notes/add">
+<form method="POST" action="/notes/update">
     <label for="name">Заголовок:</label>
-    <input type="text" id="name" name="name" required>
+    <input th:value="${note.name}" type="text" id="name" name="name" required>
     <label for="text">Заметка:</label>
-    <textarea id="text" name="text" required rows="15"></textarea>
+    <textarea th:utext="${note.text}" id="text" name="text" required rows="15"></textarea>
     <p th:if="${error}" class="error" th:utext="${error}"></p>
-    <button type="submit">Добавить заметку</button>
+    <input type="hidden" name="noteId" th:value="${noteId}"/>
+    <button type="submit">Изменить заметку</button>
 </form>
 </body>
 </html>

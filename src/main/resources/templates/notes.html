@@ -37,14 +37,18 @@
             text-align: left;
         }
 
-        .delete-button {
+        .button-wrapper {
             position: absolute;
             top: 0;
             right: 0;
+        }
+
+        .delete-button, .update-button {
             background-color: #f44336;
             color: white;
             border: none;
             padding: 5px 10px;
+            margin-top: 10px;
             border-radius: 3px;
         }
     </style>
@@ -62,17 +66,23 @@
     <div class="note" th:each="note : ${notes}">
         <div>
             <div><b>User:</b> <span th:text="${note.userName}"></span></div>
+            <p></p>
             <div><b><span th:text="${note.name}" style="font-weight: bold;"></span></b></div>
             <p></p>
             <div th:text="${note.text}"></div>
             <p></p>
-            <td>
+            <div class="button-wrapper">
                 <form th:action="@{/notes/delete}" method="post">
                     <input type="hidden" name="noteId" th:value="${note.id}"/>
                     <input type="hidden" name="action" value="delete"/>
                     <button type="submit" class="delete-button">Delete</button>
                 </form>
-            </td>
+                <form th:action="@{/notes/update}" method="get">
+                    <input type="hidden" name="noteId" th:value="${note.id}"/>
+                    <input type="hidden" name="action" value="update"/>
+                    <button type="submit" class="update-button">Update</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

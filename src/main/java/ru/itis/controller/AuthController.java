@@ -38,6 +38,11 @@ public class AuthController {
             return "register";
         }
 
+        if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
+            model.addAttribute("error", "Пароли не совпадают");
+            return "register";
+        }
+
         if (!userService.saveUser(userDTO)){
             model.addAttribute("error", "Пользователь с таким именем уже существует!");
             return "register";

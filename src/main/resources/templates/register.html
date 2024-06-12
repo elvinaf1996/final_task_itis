@@ -46,16 +46,11 @@
 <form method="POST" action="/register">
     <label for="username">Имя пользователя:</label>
     <input type="text" id="username" name="username" required>
-
     <label for="password">Пароль:</label>
     <input type="password" id="password" name="password" required>
-
-<!--    <label>Роли:</label><br>-->
-<!--    <input type="checkbox" id="role_user" name="roles" value="ROLE_USER"> Пользователь<br>-->
-    <input type="checkbox" id="role_admin" name="roles" value="ROLE_ADMIN"> Администратор<br>
-
+    <label for="confirmPassword">Повторите пароль:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>]nput type="checkbox" id="role_admin" name="roles" value="ROLE_ADMIN"> Администратор<br>
     <p th:if="${error}" class="error" th:utext="${error}"></p>
-
     <button type="submit">Регистрация</button>
 </form>
 </body>
