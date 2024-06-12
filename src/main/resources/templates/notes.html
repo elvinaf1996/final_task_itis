@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in with your account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #ccc;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .note {
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            position: relative;
+            text-align: left;
+        }
+
+        .delete-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="button-container">
+    <a th:href="@{/notes/add}" class="button">Добавить заметку</a>
+    <a th:href="@{/}" class="button">Главная</a>
+    <a th:href="@{/notes}" class="button" th:if="${isAdmin and isMine}">Все заметки</a>
+    <a th:href="@{/notes/my}" class="button" th:if="${isAdmin and !isMine}">Мои заметки</a>
+    <a th:href="@{/admin}" class="button" th:if="${isAdmin}" style="color: red;">Все пользователи</a>
+</div>
+
+<div>
+    <div class="note" th:each="note : ${notes}">
+        <div>
+            <div><b>User:</b> <span th:text="${note.userName}"></span></div>
+            <div><b><span th:text="${note.name}" style="font-weight: bold;"></span></b></div>
+            <p></p>
+            <div th:text="${note.text}"></div>
+            <p></p>
+            <td>
+                <form th:action="@{/notes/delete}" method="post">
+                    <input type="hidden" name="noteId" th:value="${note.id}"/>
+                    <input type="hidden" name="action" value="delete"/>
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </td>
+        </div>
+    </div>
+</div>
+</body>
+</html>

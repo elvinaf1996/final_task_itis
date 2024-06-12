@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Note</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            margin-top: 20px;
+            width: 25%;
+        }
+
+        input, button, textarea {
+            margin: 5px;
+            padding: 5px;
+            width: 75%;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<form method="POST" action="/notes/add">
+    <label for="name">Заголовок:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="text">Заметка:</label>
+    <textarea id="text" name="text" required rows="15"></textarea>
+
+    <p th:if="${error}" class="error" th:utext="${error}"></p>
+
+    <button type="submit">Добавить заметку</button>
+</form>
+</body>
+</html>

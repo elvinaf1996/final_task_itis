@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Login page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            margin-top: 20px;
+            width: 25%;
+        }
+
+        input, button {
+            margin: 5px;
+            padding: 5px;
+            width: 75%;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h2 style="margin-right: 20px;">Введите данные учетной <br>
+    записи для входа в систему:</h2>
+<p></p>
+<form method="POST" action="/login">
+    <h3>Вход в систему</h3>
+    <input name="username" type="text" placeholder="Username" autofocus="true"/>
+    <input name="password" type="password" placeholder="Password"/>
+    <p th:if="${param.error != null}" class="error">Неверный логин или пароль</p>
+    <button type="submit">Войти</button>
+    <h4><a href="/register">Зарегистрироваться</a></h4>
+</form>
+</body>
+</html>
